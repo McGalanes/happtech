@@ -1,5 +1,5 @@
 import com.android.build.gradle.LibraryExtension
-import com.github.mcgalanes.happtech.modularization.configureAndroid
+import com.github.mcgalanes.happtech.modularization.configureKotlinAndroid
 import com.github.mcgalanes.happtech.modularization.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -15,7 +15,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             }
 
             extensions.configure<LibraryExtension> {
-                configureAndroid(this)
+                configureKotlinAndroid(this)
             }
 
             dependencies {

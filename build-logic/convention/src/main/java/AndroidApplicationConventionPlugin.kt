@@ -1,6 +1,5 @@
 import com.android.build.api.dsl.ApplicationExtension
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
-import com.github.mcgalanes.happtech.modularization.configureAndroid
+import com.github.mcgalanes.happtech.modularization.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -13,8 +12,8 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.android")
             }
 
-            extensions.configure<BaseAppModuleExtension> {
-                configureAndroid(commonExtension = this)
+            extensions.configure<ApplicationExtension> {
+                configureKotlinAndroid(this)
             }
         }
     }
