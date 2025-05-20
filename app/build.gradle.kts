@@ -14,6 +14,7 @@ android {
 dependencies {
     implementation(projects.core.design)
     implementation(projects.core.data)
+    implementation(projects.core.network)
 
     // Features
     implementation(projects.feature.museumcollection.list)

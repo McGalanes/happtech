@@ -1,5 +1,6 @@
 package com.github.mcgalanes.happtech.core.data.repository
 
+import android.util.Log
 import com.github.mcgalanes.happtech.core.data.remote.api.RijksMuseumApi
 import com.github.mcgalanes.happtech.core.data.remote.response.toDomain
 import com.github.mcgalanes.happtech.core.domain.model.ArtObject

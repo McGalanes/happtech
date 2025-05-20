@@ -12,8 +12,7 @@ data class ArtObject(
     val productionPlaces: Set<String>,
 ) {
     data class Image(
-        val width: Int,
-        val height: Int,
+        val ratio: Float,
         val url: String,
     )
 }

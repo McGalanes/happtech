@@ -24,6 +24,7 @@ data class CollectionResponse(
     ) {
         @Serializable
         data class Image(
+            @SerialName("guid") val guid: String?,
             @SerialName("width") val width: Int?,
             @SerialName("height") val height: Int?,
             @SerialName("url") val url: String?,
@@ -41,7 +42,7 @@ fun CollectionResponse.ArtObject.toDomain(): ArtObjectDomain {
         id = id.orEmpty(),
         objectNumber = objectNumber.orEmpty(),
         title = title.orEmpty(),
-        hasImage = hasImage ?: false,
+        hasImage = webImage?.guid != null && hasImage ?: false,
         principalOrFirstMaker = principalOrFirstMaker.orEmpty(),
         longTitle = longTitle.orEmpty(),
         webImage = webImage?.toDomain(),
@@ -51,10 +52,14 @@ fun CollectionResponse.ArtObject.toDomain(): ArtObjectDomain {
 }
 
 //TODO: tests
-fun CollectionResponse.ArtObject.Image.toDomain(): ArtObjectDomain.Image {
+fun CollectionResponse.ArtObject.Image.toDomain(): ArtObjectDomain.Image? {
+    if (guid == null) return null
+
+    val widthFloat = requireNotNull(width).toFloat()
+    val heightFloat = requireNotNull(height).toFloat()
+
     return ArtObjectDomain.Image(
-        width = requireNotNull(width) { "Width cannot be null" },
-        height = requireNotNull(height) { "Height cannot be null" },
+        ratio = widthFloat / heightFloat,
         url = url.orEmpty(),
     )
 }

@@ -11,16 +11,14 @@ dependencies {
     implementation(projects.core.domain)
     implementation(projects.core.design)
 
-    // Core Android dependencies
     implementation(libs.androidx.activity.compose)
-
-    // Arch Components
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
-
     implementation(libs.androidx.compose.material.icons)
+    implementation(libs.bundles.coil)
     implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.koin.androidx.compose)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)

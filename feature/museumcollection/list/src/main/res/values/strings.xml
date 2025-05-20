@@ -1,3 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="feature_museumcollection_list_no_image_content_description">No image</string>
 </resources>
