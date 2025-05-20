@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.happtech.android.library)
-    alias(libs.plugins.happtech.android.room)
 }
 
 android {

@@ -1,6 +1,7 @@
 package com.github.mcgalanes.happtech.injection
 
 import android.app.Application
+import com.github.mcgalanes.happtech.core.data.injection.dataModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.logger.AndroidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -14,5 +15,7 @@ internal fun Application.initKoin() {
     }
 }
 
-private fun getModules(): List<Module> = listOf(
-)
+private fun getModules(): List<Module> =
+    listOf(
+        dataModule,
+    )
