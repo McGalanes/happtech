@@ -2,7 +2,7 @@ package com.github.mcgalanes.happtech.core.data.remote.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import com.github.mcgalanes.happtech.core.domain.model.ArtObject as ArtObjectDomain
+import com.github.mcgalanes.happtech.core.domain.model.ArtObjectLight as ArtObjectDomain
 
 @Serializable
 data class CollectionResponse(

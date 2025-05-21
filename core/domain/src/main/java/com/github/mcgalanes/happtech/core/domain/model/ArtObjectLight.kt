@@ -1,6 +1,6 @@
 package com.github.mcgalanes.happtech.core.domain.model
 
-data class ArtObject(
+data class ArtObjectLight(
     val objectNumber: String,
     val title: String,
     val hasImage: Boolean,

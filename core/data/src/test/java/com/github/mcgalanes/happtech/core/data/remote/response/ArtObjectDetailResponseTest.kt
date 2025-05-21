@@ -5,7 +5,7 @@ import org.junit.Assert.assertThrows
 import org.junit.Test
 
 
-class ArtObjectDetailMapperTest {
+class ArtObjectLightDetailMapperTest {
 
     @Test
     fun `toDomain should throws when artObject is null`() {

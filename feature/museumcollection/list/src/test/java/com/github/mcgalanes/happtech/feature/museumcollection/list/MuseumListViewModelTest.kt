@@ -1,7 +1,7 @@
 package com.github.mcgalanes.happtech.feature.museumcollection.list
 
 import app.cash.turbine.test
-import com.github.mcgalanes.happtech.core.domain.model.ArtObject
+import com.github.mcgalanes.happtech.core.domain.model.ArtObjectLight
 import com.github.mcgalanes.happtech.feature.museumcollection.list.fake.FakeRijksMuseumRepository
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.test.runTest
@@ -15,7 +15,7 @@ class MuseumListViewModelTest {
         // GIVEN
         val initialData =
             listOf(
-                ArtObject(
+                ArtObjectLight(
                     objectNumber = "1",
                     title = "Title 1",
                     webImage = null,
@@ -77,7 +77,7 @@ class MuseumListViewModelTest {
 
         val searchData =
             listOf(
-                ArtObject(
+                ArtObjectLight(
                     objectNumber = "2",
                     title = "Title 2",
                     webImage = null,

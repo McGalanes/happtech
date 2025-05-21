@@ -25,11 +25,11 @@ import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.github.mcgalanes.happtech.core.design.HapptechTheme
 import com.github.mcgalanes.happtech.core.design.component.NoImage
-import com.github.mcgalanes.happtech.core.domain.model.ArtObject
+import com.github.mcgalanes.happtech.core.domain.model.ArtObjectLight
 
 @Composable
 fun ArtObjectItem(
-    artObject: ArtObject,
+    artObject: ArtObjectLight,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -82,11 +82,11 @@ fun ArtObjectItem(
 private fun Preview_ArtObjectItem() {
     HapptechTheme {
         ArtObjectItem(
-            artObject = ArtObject(
+            artObject = ArtObjectLight(
                 objectNumber = "1",
                 title = "Title",
                 hasImage = true,
-                webImage = ArtObject.Image(
+                webImage = ArtObjectLight.Image(
                     ratio = 16 / 9f,
                     url = "https://lh5.ggpht.com/EHhJDrv4IB_89m9w9VlcYRYHYOuvU72iwD11oZ1HL3J5QcCMfmAD48CVxAtUwts9RT55W4lWSPI19wb1lSRZ9zecKMA=s0",
                 ),
