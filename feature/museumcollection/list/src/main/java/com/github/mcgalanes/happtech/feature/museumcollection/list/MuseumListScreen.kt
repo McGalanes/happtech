@@ -2,6 +2,7 @@ package com.github.mcgalanes.happtech.feature.museumcollection.list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
@@ -18,11 +19,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.mcgalanes.happtech.core.design.HapptechTheme
 import com.github.mcgalanes.happtech.core.design.util.isLargeScreen
 import com.github.mcgalanes.happtech.feature.museumcollection.list.component.ArtObjectItem
+import com.github.mcgalanes.happtech.feature.museumcollection.list.component.SearchTopAppBar
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun MuseumListScreen(
-    onItemClick: (objectNumber: String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: MuseumListViewModel = koinViewModel(),
 ) {
@@ -31,13 +32,14 @@ fun MuseumListScreen(
     MuseumListScreen(
         modifier = modifier,
         state = state,
-        onItemClick = onItemClick,
-    )
+        onItemClick = { TODO() },
+        onQueryChange = { TODO() })
 }
 
 @Composable
 private fun MuseumListScreen(
     state: UiState,
+    onQueryChange: (String) -> Unit,
     onItemClick: (objectNumber: String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -45,7 +47,13 @@ private fun MuseumListScreen(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.background,
         contentColor = MaterialTheme.colorScheme.onBackground,
-    ) { padding ->
+        topBar = {
+            SearchTopAppBar(
+                modifier = Modifier.fillMaxWidth(),
+                queryValue = state.query,
+                onValueChange = onQueryChange,
+            )
+        }) { padding ->
         LazyVerticalStaggeredGrid(
             modifier = Modifier
                 .fillMaxSize()
@@ -75,6 +83,7 @@ private fun Preview_MuseumListScreen() {
         MuseumListScreen(
             modifier = Modifier.fillMaxSize(),
             state = UiState(),
+            onQueryChange = {},
             onItemClick = {},
         )
     }

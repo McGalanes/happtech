@@ -19,7 +19,6 @@ class MainActivity : ComponentActivity() {
             HapptechTheme {
                 MuseumListScreen(
                     modifier = Modifier.fillMaxSize(),
-                    onItemClick = { },
                 )
             }
         }

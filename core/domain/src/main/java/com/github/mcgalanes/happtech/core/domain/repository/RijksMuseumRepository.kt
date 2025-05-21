@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface RijksMuseumRepository {
     fun getCollectionFlow(): Flow<List<ArtObject>>
-    suspend fun refreshAllCollection(): Result<Unit>
+    suspend fun refreshAllCollection(query: String? = null): Result<Unit>
 }

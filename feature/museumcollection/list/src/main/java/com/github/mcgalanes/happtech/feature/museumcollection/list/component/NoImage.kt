@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.github.mcgalanes.happtech.feature.museumcollection.list.R
 
 @Composable
-private fun NoImage(
+fun NoImage(
     contentDescription: String,
     modifier: Modifier = Modifier,
 ) {

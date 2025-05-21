@@ -7,16 +7,20 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 
 interface RijksMuseumApi {
-    suspend fun getCollection(): Result<CollectionResponse>
+    suspend fun getCollection(query: String? = null): Result<CollectionResponse>
 
     class Default(private val client: HttpClient) : RijksMuseumApi {
 
-        override suspend fun getCollection(): Result<CollectionResponse> =
-            apiCall {
-                client.get("collection") {
-                    parameter("ps", 100)
-                    parameter("q", "FRANCE")
-                }
+        override suspend fun getCollection(query: String?): Result<CollectionResponse> = apiCall {
+            client.get("collection") {
+                parameter(QUERY_PARAM_PAGE_SIZE, 100)
+                query?.let { parameter(QUERY_PARAM_QUERY, it) }
             }
+        }
+
+        companion object {
+            private const val QUERY_PARAM_PAGE_SIZE = "ps"
+            private const val QUERY_PARAM_QUERY = "q"
+        }
     }
 }

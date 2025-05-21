@@ -92,12 +92,14 @@ class DefaultRijksMuseumRepositoryTest {
                     title = "Title 1",
                     longTitle = "Long Title 1",
                     headerImage = CollectionResponse.ArtObject.Image(
+                        guid = "guid1",
                         url = "https://example.com/image1.jpg",
                         width = 100,
                         height = 100,
                     ),
                     principalOrFirstMaker = "Maker 1",
                     webImage = CollectionResponse.ArtObject.Image(
+                        guid = "guid2",
                         url = "https://example.com/image2.jpg",
                         width = 100,
                         height = 100,

@@ -66,4 +66,28 @@ class RijksMuseumApiTest {
         // THEN
         assertEquals("/api/en/collection", actualUrl.encodedPath)
     }
+
+    @Test
+    fun `getCollection, should call with correct query parameters`() = runTest {
+        // GIVEN
+        lateinit var actualUrl: Url
+
+        val engine = mockEngine(
+            statusCode = HttpStatusCode.OK,
+            content = FakeRijksMuseumPayloads.getCollectionCorrectPayload(),
+            onInterceptUrl = { actualUrl = it },
+        )
+
+        val client = createRijksMuseumHttpClient(engine = engine, apiKey = "1234-abcde")
+
+        val api = RijksMuseumApi.Default(client = client)
+
+        val query = "Leonardo da Vinci"
+
+        // WHEN
+        api.getCollection(query = query)
+
+        // THEN
+        assertEquals(query, actualUrl.parameters["q"])
+    }
 }
