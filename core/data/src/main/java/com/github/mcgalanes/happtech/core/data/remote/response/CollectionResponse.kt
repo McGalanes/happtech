@@ -38,15 +38,10 @@ fun CollectionResponse.toDomain(): List<ArtObjectDomain> {
 
 fun CollectionResponse.ArtObject.toDomain(): ArtObjectDomain {
     return ArtObjectDomain(
-        id = id.orEmpty(),
         objectNumber = objectNumber.orEmpty(),
         title = title.orEmpty(),
         hasImage = webImage?.guid != null && hasImage ?: false,
-        principalOrFirstMaker = principalOrFirstMaker.orEmpty(),
-        longTitle = longTitle.orEmpty(),
         webImage = webImage?.toDomain(),
-        headerImage = headerImage?.toDomain(),
-        productionPlaces = productionPlaces?.toSet() ?: emptySet(),
     )
 }
 

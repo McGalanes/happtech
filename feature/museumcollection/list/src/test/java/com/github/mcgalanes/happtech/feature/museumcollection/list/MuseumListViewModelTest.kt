@@ -18,13 +18,8 @@ class MuseumListViewModelTest {
                 ArtObject(
                     objectNumber = "1",
                     title = "Title 1",
-                    longTitle = "Long Title 1",
-                    headerImage = null,
-                    principalOrFirstMaker = "Maker 1",
                     webImage = null,
                     hasImage = false,
-                    productionPlaces = setOf("Place 1", "Place 2"),
-                    id = "1",
                 ),
             )
 
@@ -85,13 +80,8 @@ class MuseumListViewModelTest {
                 ArtObject(
                     objectNumber = "2",
                     title = "Title 2",
-                    longTitle = "Long Title 2",
-                    headerImage = null,
-                    principalOrFirstMaker = "Maker 2",
                     webImage = null,
                     hasImage = false,
-                    productionPlaces = setOf("Place 1", "Place 2"),
-                    id = "2",
                 ),
             )
 

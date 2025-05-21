@@ -83,21 +83,13 @@ private fun Preview_ArtObjectItem() {
     HapptechTheme {
         ArtObjectItem(
             artObject = ArtObject(
-                id = "1",
                 objectNumber = "1",
                 title = "Title",
                 hasImage = true,
-                principalOrFirstMaker = "Maker",
-                longTitle = "Long Title",
                 webImage = ArtObject.Image(
                     ratio = 16 / 9f,
                     url = "https://lh5.ggpht.com/EHhJDrv4IB_89m9w9VlcYRYHYOuvU72iwD11oZ1HL3J5QcCMfmAD48CVxAtUwts9RT55W4lWSPI19wb1lSRZ9zecKMA=s0",
                 ),
-                headerImage = ArtObject.Image(
-                    ratio = 16 / 9f,
-                    url = "https://lh5.ggpht.com/vMN8tGK7lHeI1Oe6_p2hFWStHqR0iUR1GdqsInkZoRdCwsYlKdqrb_2-zVX_4SxfY7p7T-HmDH-pj4fq06QCc_Xtr016=s0",
-                ),
-                productionPlaces = setOf("Place"),
             ),
             onClick = {},
         )
