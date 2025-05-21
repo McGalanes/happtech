@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.github.mcgalanes.happtech.core.design.HapptechTheme
 import com.github.mcgalanes.happtech.core.design.component.VerticalSpacer
 import com.github.mcgalanes.happtech.core.domain.model.ArtObjectDetail
+import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun SummaryCard(
@@ -95,6 +96,11 @@ fun SummaryCard(
             Text(
                 text = artObject.dimensions.toLabel(),
                 style = MaterialTheme.typography.labelSmall,
+            )
+            VerticalSpacer(4.dp)
+
+            BadgeGroup(
+                items = (artObject.objectCollection + artObject.techniques).toImmutableList(),
             )
 
             VerticalSpacer(16.dp)
