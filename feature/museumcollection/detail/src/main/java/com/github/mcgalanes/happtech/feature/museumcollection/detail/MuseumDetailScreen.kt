@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.github.mcgalanes.happtech.core.design.component.GenericError
 import com.github.mcgalanes.happtech.core.design.util.isLargeScreen
 import com.github.mcgalanes.happtech.feature.museumcollection.detail.component.ImageCard
 import com.github.mcgalanes.happtech.feature.museumcollection.detail.component.MuseumDetailBottomBar
@@ -34,6 +35,7 @@ fun MuseumDetailScreen(
     MuseumDetailScreen(
         state = state,
         onSummaryCardClick = viewModel::onSummaryHeaderClick,
+        onRetryClick = viewModel::onRetryClick,
         onNavUpClick = onNavUp,
         modifier = modifier,
     )
@@ -43,6 +45,7 @@ fun MuseumDetailScreen(
 private fun MuseumDetailScreen(
     state: UiState,
     onSummaryCardClick: () -> Unit,
+    onRetryClick: () -> Unit,
     onNavUpClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -122,7 +125,13 @@ private fun MuseumDetailScreen(
             }
 
             else -> {
-                //TODO: show retry ?
+                GenericError(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(24.dp),
+                    labelColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    onRetryClick = onRetryClick,
+                )
             }
         }
     }

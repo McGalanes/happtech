@@ -21,27 +21,34 @@ class MuseumDetailViewModel(
     private val objectNumber: String = requireNotNull(handle[ARG_OBJECT_NUMBER])
 
     init {
-        viewModelScope.launch {
-            repository.getArtObjectDetail(objectNumber)
-                .onSuccess { artObjectDetail ->
-                    _uiState.update {
-                        it.copy(
-                            artObject = artObjectDetail,
-                            loading = false,
-                        )
-                    }
-                }
-                .onFailure {
-                    _uiState.update {
-                        it.copy(loading = false)
-                    }
-                }
-        }
+        refresh()
     }
 
     fun onSummaryHeaderClick() {
         _uiState.update {
             it.copy(expanded = !it.expanded)
+        }
+    }
+
+    fun onRetryClick() {
+        _uiState.update { it.copy(loading = true) }
+        refresh()
+    }
+
+    private fun refresh() {
+        viewModelScope.launch {
+            repository.getArtObjectDetail(objectNumber).onSuccess { artObjectDetail ->
+                _uiState.update {
+                    it.copy(
+                        artObject = artObjectDetail,
+                        loading = false,
+                    )
+                }
+            }.onFailure {
+                _uiState.update {
+                    it.copy(loading = false)
+                }
+            }
         }
     }
 }
