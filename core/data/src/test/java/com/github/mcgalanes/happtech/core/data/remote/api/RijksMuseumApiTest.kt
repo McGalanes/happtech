@@ -90,4 +90,60 @@ class RijksMuseumApiTest {
         // THEN
         assertEquals(query, actualUrl.parameters["q"])
     }
+
+    @Test
+    fun `getArtObjectDetail, should return success result`() = runTest {
+        // GIVEN
+        val engine = mockEngine(
+            statusCode = HttpStatusCode.OK,
+            content = FakeRijksMuseumPayloads.getArtObjectDetailCorrectPayload()
+        )
+        val client = createRijksMuseumHttpClient(engine = engine, apiKey = "1234-abcde")
+        val api = RijksMuseumApi.Default(client = client)
+
+        // WHEN
+        val result = api.getArtObjectDetail(objectNumber = "object-12")
+
+        // THEN
+        assert(result.isSuccess)
+    }
+
+    @Test
+    fun `getArtObjectDetail, should return failure result`() = runTest {
+        // GIVEN
+        val engine = mockEngine(
+            statusCode = HttpStatusCode.OK,
+            content = FakeRijksMuseumPayloads.getArtObjectDetailWrongPayload()
+        )
+        val client = createRijksMuseumHttpClient(engine = engine, apiKey = "1234-abcde")
+        val api = RijksMuseumApi.Default(client = client)
+
+        // WHEN
+        val result = api.getArtObjectDetail(objectNumber = "object-12")
+
+        // THEN
+        assert(result.isFailure)
+    }
+
+    @Test
+    fun `getArtObjectDetail, should call correct endpoint`() = runTest {
+        // GIVEN
+        lateinit var actualUrl: Url
+
+        val engine = mockEngine(
+            statusCode = HttpStatusCode.OK,
+            content = FakeRijksMuseumPayloads.getArtObjectDetailCorrectPayload(),
+            onInterceptUrl = { actualUrl = it },
+        )
+
+        val client = createRijksMuseumHttpClient(engine = engine, apiKey = "1234-abcde")
+
+        val api = RijksMuseumApi.Default(client = client)
+
+        // WHEN
+        api.getArtObjectDetail(objectNumber = "object-12")
+
+        // THEN
+        assertEquals("/api/en/collection/object-12", actualUrl.encodedPath)
+    }
 }
