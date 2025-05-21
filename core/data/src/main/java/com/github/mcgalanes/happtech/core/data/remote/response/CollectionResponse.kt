@@ -36,7 +36,6 @@ fun CollectionResponse.toDomain(): List<ArtObjectDomain> {
     return requireNotNull(artObjects) { "ArtObjects cannot be null" }.map { it.toDomain() }
 }
 
-//TODO: tests
 fun CollectionResponse.ArtObject.toDomain(): ArtObjectDomain {
     return ArtObjectDomain(
         id = id.orEmpty(),
@@ -51,7 +50,6 @@ fun CollectionResponse.ArtObject.toDomain(): ArtObjectDomain {
     )
 }
 
-//TODO: tests
 fun CollectionResponse.ArtObject.Image.toDomain(): ArtObjectDomain.Image? {
     if (guid == null) return null
 
