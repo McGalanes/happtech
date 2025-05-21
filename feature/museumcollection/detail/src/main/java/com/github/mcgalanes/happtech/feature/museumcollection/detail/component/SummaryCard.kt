@@ -88,9 +88,14 @@ fun SummaryCard(
 
             VerticalSpacer(4.dp)
 
-            artObject.principalMakers.forEach {
-                MakerItem(it)
-            }
+            artObject.principalMakers.forEach { MakerItem(it) }
+
+            VerticalSpacer(4.dp)
+
+            Text(
+                text = artObject.dimensions.toLabel(),
+                style = MaterialTheme.typography.labelSmall,
+            )
 
             VerticalSpacer(16.dp)
 
@@ -103,11 +108,11 @@ fun SummaryCard(
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
-                    VerticalSpacer(24.dp)
+                    VerticalSpacer(12.dp)
 
                     HorizontalDivider(modifier = Modifier.fillMaxWidth())
 
-                    VerticalSpacer(16.dp)
+                    VerticalSpacer(12.dp)
 
                     Text(
                         text = artObject.documentation.joinToString(separator = "\n\n"),
@@ -118,6 +123,11 @@ fun SummaryCard(
         }
     }
 }
+
+private fun List<ArtObjectDetail.Dimension>.toLabel(): String =
+    joinToString(separator = " x ") { dimension ->
+        "${dimension.value} ${dimension.unit}"
+    }
 
 @Preview(showSystemUi = true)
 @Composable

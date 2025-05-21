@@ -13,7 +13,7 @@ fun MakerItem(
 ) {
     Text(
         modifier = modifier,
-        text = "${maker.name}\u00A0•\u00A0${maker.dateOfBirth}—${maker.dateOfDeath}",
+        text = "${maker.name}\u00A0•\u00A0${maker.dateOfBirth ?: ""}—${maker.dateOfDeath ?: ""}",
         style = MaterialTheme.typography.labelMedium,
     )
 }

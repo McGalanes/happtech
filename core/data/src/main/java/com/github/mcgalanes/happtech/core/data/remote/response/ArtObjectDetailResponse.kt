@@ -62,8 +62,8 @@ fun ArtObjectDetailResponse.toDomain(): ArtObjectDetail {
         principalMakers = obj.principalMakers?.map {
             ArtObjectDetail.PrincipalMaker(
                 name = it.name.orEmpty(),
-                dateOfBirth = it.dateOfBirth,
-                dateOfDeath = it.dateOfDeath,
+                dateOfBirth = it.dateOfBirth?.take(4),
+                dateOfDeath = it.dateOfDeath?.take(4),
             )
         } ?: emptyList(),
         presentingDate = obj.dating?.presentingDate,
