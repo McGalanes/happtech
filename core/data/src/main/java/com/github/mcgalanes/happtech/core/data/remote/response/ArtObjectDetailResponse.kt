@@ -50,8 +50,9 @@ data class ArtObjectDetailResponse(
     }
 }
 
-fun ArtObjectDetailResponse.toDomain(): ArtObjectDetail? {
-    val obj = this.artObject ?: return null
+fun ArtObjectDetailResponse.toDomain(): ArtObjectDetail {
+    val obj = requireNotNull(this.artObject) { "ArtObject cannot be null" }
+
     return ArtObjectDetail(
         objectNumber = obj.webImage?.guid.orEmpty(),
         title = obj.title.orEmpty(),

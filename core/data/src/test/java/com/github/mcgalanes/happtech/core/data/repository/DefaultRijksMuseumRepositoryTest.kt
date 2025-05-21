@@ -1,6 +1,7 @@
 package com.github.mcgalanes.happtech.core.data.repository
 
 import com.github.mcgalanes.happtech.core.data.fake.FakeRijksMuseumApi
+import com.github.mcgalanes.happtech.core.data.remote.response.ArtObjectDetailResponse
 import com.github.mcgalanes.happtech.core.data.remote.response.CollectionResponse
 import com.github.mcgalanes.happtech.core.data.remote.response.toDomain
 import kotlinx.coroutines.flow.first
@@ -84,6 +85,47 @@ class DefaultRijksMuseumRepositoryTest {
         Assert.assertEquals(response.toDomain(), flow.first())
     }
 
+    @Test
+    fun `getArtObjectDetail, should return success data when api is OK`() = runTest {
+        // GIVEN
+        val detailResponse = fakeArtObjectDetailResponseData()
+
+        val api =
+            FakeRijksMuseumApi(
+                mockGetArtObjectDetail = { Result.success(detailResponse) },
+                mockGetCollection = { Result.success(fakeCollectionResponseData()) },
+            )
+
+        val repository = DefaultRijksMuseumRepository(api)
+
+        // WHEN
+        val result = repository.getArtObjectDetail("1")
+
+        // THEN
+        Assert.assertEquals(
+            detailResponse.toDomain(),
+            result.getOrThrow(),
+        )
+    }
+
+    @Test
+    fun `getArtObjectDetail, should return failure when api fails`() = runTest {
+        // GIVEN
+        val api =
+            FakeRijksMuseumApi(
+                mockGetArtObjectDetail = { Result.failure(Exception("API error")) },
+                mockGetCollection = { Result.success(fakeCollectionResponseData()) },
+            )
+
+        val repository = DefaultRijksMuseumRepository(api)
+
+        // WHEN
+        val result = repository.getArtObjectDetail("1")
+
+        // THEN
+        Assert.assertTrue(result.isFailure)
+    }
+
     private fun fakeCollectionResponseData() =
         CollectionResponse(
             artObjects = listOf(
@@ -111,5 +153,40 @@ class DefaultRijksMuseumRepositoryTest {
                 ),
             ),
             count = 0,
+        )
+
+    private fun fakeArtObjectDetailResponseData() =
+        ArtObjectDetailResponse(
+            artObject = ArtObjectDetailResponse.ArtObject(
+                objectNumber = "fake-object-number",
+                title = "fake-title",
+                description = "fake-description",
+                objectCollection = listOf("fake-collection"),
+                techniques = listOf("fake-technique"),
+                principalMakers = listOf(
+                    ArtObjectDetailResponse.ArtObject.PrincipalMaker(
+                        name = "fake-maker-name",
+                        dateOfBirth = "fake-maker-birth",
+                        dateOfDeath = "fake-maker-death",
+                    ),
+                ),
+                dating = ArtObjectDetailResponse.ArtObject.Dating(
+                    presentingDate = "fake-dating",
+                ),
+                documentation = listOf("fake-documentation"),
+                dimensions = listOf(
+                    ArtObjectDetailResponse.ArtObject.Dimension(
+                        unit = "cm",
+                        type = "height",
+                        value = "10",
+                    ),
+                ),
+                webImage = ArtObjectDetailResponse.ArtObject.Image(
+                    guid = "fake-guid",
+                    width = 100,
+                    height = 200,
+                    url = "https://example.com/fake-image.jpg",
+                ),
+            ),
         )
 }
