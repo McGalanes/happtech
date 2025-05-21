@@ -10,6 +10,7 @@ android {
 dependencies {
     implementation(projects.happtech.core.domain)
     implementation(projects.happtech.core.network)
+    implementation(projects.happtech.core.database)
 
     implementation(libs.kotlinx.coroutines.android)
 

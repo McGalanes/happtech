@@ -2,6 +2,7 @@ package com.github.mcgalanes.happtech.injection
 
 import android.app.Application
 import com.github.mcgalanes.happtech.core.data.injection.dataModule
+import com.github.mcgalanes.happtech.core.database.injection.databaseModule
 import com.github.mcgalanes.happtech.core.network.injection.networkModule
 import com.github.mcgalanes.happtech.feature.museumcollection.detail.injection.museumDetailFeatureModule
 import com.github.mcgalanes.happtech.feature.museumcollection.list.injection.museumListFeatureModule
@@ -21,7 +22,8 @@ internal fun Application.initKoin() {
 private fun getModules(): List<Module> =
     listOf(
         dataModule,
-        networkModule,
-        museumListFeatureModule,
+        databaseModule,
         museumDetailFeatureModule,
+        museumListFeatureModule,
+        networkModule,
     )

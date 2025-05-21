@@ -5,7 +5,7 @@ import com.github.mcgalanes.happtech.core.data.remote.response.ArtObjectDetailRe
 import com.github.mcgalanes.happtech.core.data.remote.response.CollectionResponse
 
 class FakeRijksMuseumApi(
-    private val mockGetCollection: () -> Result<CollectionResponse>,
+    private val mockGetCollection: () -> Result<CollectionResponse> = { throw NotImplementedError() },
     private val mockGetArtObjectDetail: () -> Result<ArtObjectDetailResponse> = { throw NotImplementedError() },
 ) : RijksMuseumApi {
     override suspend fun getCollection(query: String?): Result<CollectionResponse> {

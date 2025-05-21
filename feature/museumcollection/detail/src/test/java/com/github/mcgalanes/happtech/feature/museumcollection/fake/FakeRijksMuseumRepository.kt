@@ -1,16 +1,14 @@
 package com.github.mcgalanes.happtech.feature.museumcollection.fake
 
-import com.github.mcgalanes.happtech.core.domain.model.ArtObjectLight
 import com.github.mcgalanes.happtech.core.domain.model.ArtObjectDetail
+import com.github.mcgalanes.happtech.core.domain.model.ArtObjectLight
 import com.github.mcgalanes.happtech.core.domain.repository.RijksMuseumRepository
 import kotlinx.coroutines.flow.Flow
 
 class FakeRijksMuseumRepository : RijksMuseumRepository {
     private var detailData: ArtObjectDetail? = null
 
-    override fun getCollectionFlow(): Flow<List<ArtObjectLight>> = throw NotImplementedError()
-
-    override suspend fun refreshAllCollection(query: String?): Result<Unit> {
+    override fun getCollectionFlow(): Flow<List<ArtObjectLight>> {
         throw NotImplementedError()
     }
 
@@ -18,6 +16,10 @@ class FakeRijksMuseumRepository : RijksMuseumRepository {
         detailData?.let {
             return Result.success(it)
         } ?: return Result.failure(Exception("No detail data available"))
+    }
+
+    override suspend fun refreshCollection(query: String?): Result<Unit> {
+        return Result.success(Unit)
     }
 
     fun setDataForDetail(artObjectDetail: ArtObjectDetail?) {

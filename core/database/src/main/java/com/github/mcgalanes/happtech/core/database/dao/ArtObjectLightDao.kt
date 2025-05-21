@@ -6,11 +6,12 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.github.mcgalanes.happtech.core.database.entity.ArtObjectLightEntity
 import com.github.mcgalanes.happtech.core.database.entity.ArtObjectLightTable
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ArtObjectLightDao {
     @Query("SELECT * FROM ${ArtObjectLightTable.TABLE_NAME}")
-    suspend fun getAll(): List<ArtObjectLightEntity>
+    fun getAll(): Flow<List<ArtObjectLightEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(entities: List<ArtObjectLightEntity>)

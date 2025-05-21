@@ -11,7 +11,7 @@ internal object ArtObjectLightTable {
     const val COLUMN_HAS_IMAGE = "hasImage"
     const val COLUMN_IMAGE_URL = "imageUrl"
     const val COLUMN_IMAGE_RATIO = "imageRatio"
-    const val COLUMN_QUERY = "imageRatio"
+    const val COLUMN_QUERY = "query"
 }
 
 @Entity(tableName = ArtObjectLightTable.TABLE_NAME)
