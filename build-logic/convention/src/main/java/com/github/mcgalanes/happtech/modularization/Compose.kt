@@ -15,8 +15,8 @@ internal fun Project.configureCompose(commonExtension: BaseExtension) {
             "implementation"(platform(bom))
             "implementation"(libs.findLibrary("androidx-compose-material3").get())
             "implementation"(libs.findLibrary("androidx-compose-ui").get())
-            "debugImplementation"(libs.findLibrary("androidx-compose-ui-tooling-preview").get())
-            "debugImplementation"(libs.findLibrary("androidx-compose-ui-tooling").get())
+            "implementation"(libs.findLibrary("androidx-compose-ui-tooling-preview").get())
+            "implementation"(libs.findLibrary("androidx-compose-ui-tooling").get())
         }
     }
 }
