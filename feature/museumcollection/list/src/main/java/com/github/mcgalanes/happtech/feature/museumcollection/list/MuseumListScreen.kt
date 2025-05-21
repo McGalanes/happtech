@@ -28,6 +28,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun MuseumListScreen(
+    navToDetail: (objectNumber: String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: MuseumListViewModel = koinViewModel(),
 ) {
@@ -36,7 +37,7 @@ fun MuseumListScreen(
     MuseumListScreen(
         modifier = modifier,
         state = state,
-        onItemClick = { TODO() },
+        onItemClick = navToDetail,
         onQueryChange = viewModel::onQueryChange,
         onSearchClick = viewModel::onSearchClick,
     )

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.happtech.android.application)
     alias(libs.plugins.happtech.android.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -14,10 +15,12 @@ android {
 dependencies {
     implementation(projects.core.design)
     implementation(projects.core.data)
+    implementation(projects.core.navigation)
     implementation(projects.core.network)
 
     // Features
     implementation(projects.feature.museumcollection.list)
+    implementation(projects.feature.museumcollection.detail)
 
     // Core Android dependencies
     implementation(libs.androidx.core.ktx)
@@ -33,8 +36,4 @@ dependencies {
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)
     implementation(libs.koin.android)
-
-    // Compose
-    val composeBom = platform(libs.androidx.compose.bom)
-    implementation(composeBom)
 }

@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandCircleDown
 import androidx.compose.material3.HorizontalDivider
@@ -44,9 +46,11 @@ fun SummaryCard(
         shape = MaterialTheme.shapes.extraLarge,
         color = MaterialTheme.colorScheme.surface,
         contentColor = MaterialTheme.colorScheme.onSurface,
+        shadowElevation = 2.dp,
     ) {
         Column(
             modifier = Modifier
+                .verticalScroll(rememberScrollState())
                 .clickable(
                     onClick = onHeaderClick,
                     indication = null,
@@ -62,6 +66,9 @@ fun SummaryCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end = 8.dp),
                     text = artObject.title,
                     style = MaterialTheme.typography.titleLarge,
                 )
@@ -103,7 +110,7 @@ fun SummaryCard(
                     VerticalSpacer(16.dp)
 
                     Text(
-                        text = artObject.objectCollection.joinToString(separator = "\n\n"),
+                        text = artObject.documentation.joinToString(separator = "\n\n"),
                         style = MaterialTheme.typography.bodyMedium,
                     )
                 }

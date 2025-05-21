@@ -24,6 +24,7 @@ import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.github.mcgalanes.happtech.core.design.HapptechTheme
+import com.github.mcgalanes.happtech.core.design.component.NoImage
 import com.github.mcgalanes.happtech.core.domain.model.ArtObject
 
 @Composable

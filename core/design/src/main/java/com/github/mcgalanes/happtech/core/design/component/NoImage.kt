@@ -1,4 +1,4 @@
-package com.github.mcgalanes.happtech.feature.museumcollection.list.component
+package com.github.mcgalanes.happtech.core.design.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,15 +13,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.github.mcgalanes.happtech.feature.museumcollection.list.R
 
 @Composable
 fun NoImage(
-    contentDescription: String,
     modifier: Modifier = Modifier,
+    contentDescription: String? = null,
 ) {
     Column(
         modifier
@@ -33,15 +31,17 @@ fun NoImage(
             modifier = Modifier.size(28.dp),
             painter = rememberVectorPainter(Icons.Default.NoPhotography),
             tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            contentDescription = stringResource(R.string.feature_museumcollection_list_no_image_content_description),
+            contentDescription = null,
         )
 
-        Text(
-            text = contentDescription,
-            style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis,
-        )
+        contentDescription?.let {
+            Text(
+                text = it,
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
     }
 }
