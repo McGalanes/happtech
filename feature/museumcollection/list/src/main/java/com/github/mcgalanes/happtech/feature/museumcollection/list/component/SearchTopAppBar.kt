@@ -12,8 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.github.mcgalanes.happtech.core.design.HapptechTheme
+import com.github.mcgalanes.happtech.feature.museumcollection.list.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,7 +35,7 @@ fun SearchTopAppBar(
                     keyboardController?.hide()
                     onSearchKeyboardClick()
                 },
-                placeholder = { Text("Search...") },
+                placeholder = { Text(stringResource(R.string.feature_museumcollection_list_search_hint)) },
                 leadingIcon = {
                     Icon(Icons.Default.Search, contentDescription = null)
                 },
