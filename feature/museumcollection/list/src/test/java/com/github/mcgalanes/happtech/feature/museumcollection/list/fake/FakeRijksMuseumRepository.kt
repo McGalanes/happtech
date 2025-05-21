@@ -10,9 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 class FakeRijksMuseumRepository : RijksMuseumRepository {
 
     private val _collectionFlow = MutableStateFlow<List<ArtObject>>(emptyList())
-
     private var collectionData: List<ArtObject> = emptyList()
-    private var detailData: ArtObjectDetail? = null
 
     private var shouldRefreshSucceed: Boolean = true
 
@@ -28,13 +26,7 @@ class FakeRijksMuseumRepository : RijksMuseumRepository {
     }
 
     override suspend fun getArtObjectDetail(objectNumber: String): Result<ArtObjectDetail> {
-        detailData?.let {
-            return Result.success(it)
-        } ?: return Result.failure(Exception("No detail data available"))
-    }
-
-    fun setDataForDetail(artObjectDetail: ArtObjectDetail?) {
-        detailData = artObjectDetail
+        throw NotImplementedError()
     }
 
     fun setDataForRefresh(artObjects: List<ArtObject>) {

@@ -37,18 +37,19 @@ class MuseumDetailViewModel(
 
     private fun refresh() {
         viewModelScope.launch {
-            repository.getArtObjectDetail(objectNumber).onSuccess { artObjectDetail ->
-                _uiState.update {
-                    it.copy(
-                        artObject = artObjectDetail,
-                        loading = false,
-                    )
+            repository.getArtObjectDetail(objectNumber)
+                .onSuccess { artObjectDetail ->
+                    _uiState.update {
+                        it.copy(
+                            artObject = artObjectDetail,
+                            loading = false,
+                        )
+                    }
+                }.onFailure {
+                    _uiState.update {
+                        it.copy(loading = false)
+                    }
                 }
-            }.onFailure {
-                _uiState.update {
-                    it.copy(loading = false)
-                }
-            }
         }
     }
 }
