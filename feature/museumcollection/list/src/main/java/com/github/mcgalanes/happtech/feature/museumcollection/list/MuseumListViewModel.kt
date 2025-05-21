@@ -37,12 +37,17 @@ class MuseumListViewModel(
 
     init {
         viewModelScope.launch {
-            repository.refreshAllCollection()
+            repository.refreshAllCollection(queryFlow.value)
         }
     }
 
     fun onQueryChange(query: String) {
         queryFlow.value = query
-        repository
+    }
+
+    fun onSearchClick() {
+        viewModelScope.launch {
+            repository.refreshAllCollection(queryFlow.value)
+        }
     }
 }
