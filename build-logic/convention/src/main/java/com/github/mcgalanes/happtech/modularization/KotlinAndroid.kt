@@ -19,8 +19,8 @@ internal fun Project.configureKotlinAndroid(commonExtension: CommonExtension<*, 
         }
 
         compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
+            sourceCompatibility = JavaVersion.VERSION_22
+            targetCompatibility = JavaVersion.VERSION_22
         }
 
         buildFeatures.buildConfig = false
@@ -34,5 +34,5 @@ private inline fun <reified T : KotlinBaseExtension> Project.configureKotlin() =
         is KotlinAndroidProjectExtension -> compilerOptions
         is KotlinJvmProjectExtension -> compilerOptions
         else -> TODO("Unsupported project extension $this ${T::class}")
-    }.apply { jvmTarget = JvmTarget.JVM_11 }
+    }.apply { jvmTarget = JvmTarget.JVM_22 }
 }
