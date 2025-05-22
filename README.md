@@ -22,6 +22,9 @@
 - Art Object Listing (Offline)
 - Art Object Detail
 - Landscape / Portrait
+<img src="https://github.com/user-attachments/assets/78da7200-4214-4607-bce7-84f5b91ca2e5" alt="Screenshot 1" width="200"/>
+<img src="https://github.com/user-attachments/assets/912404d2-1fe8-4203-b064-13c4fbb399f2" alt="Screenshot 2" width="200"/>
+
 
 
 # Architecture & Patterns
