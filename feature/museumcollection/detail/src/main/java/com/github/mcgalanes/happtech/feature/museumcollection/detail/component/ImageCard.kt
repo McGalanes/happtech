@@ -2,13 +2,10 @@ package com.github.mcgalanes.happtech.feature.museumcollection.detail.component
 
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.BrokenImage
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -38,7 +35,6 @@ fun ImageCard(
                     .crossfade(true)
                     .build(),
                 contentScale = ContentScale.Crop,
-                error = rememberVectorPainter(Icons.Default.BrokenImage),
                 contentDescription = null,
             )
         } else {

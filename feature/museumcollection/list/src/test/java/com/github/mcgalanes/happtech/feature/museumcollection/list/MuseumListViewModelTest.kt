@@ -31,6 +31,7 @@ class MuseumListViewModelTest {
                 UiState(
                     query = "",
                     items = artObjectLightList,
+                    loading = false,
                 ),
                 actual,
             )

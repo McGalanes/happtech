@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
@@ -54,6 +55,7 @@ fun MuseumListScreen(
                         snackbarHostState.showSnackbar(
                             message = resources.getString(event.messageRes),
                             withDismissAction = true,
+                            duration = SnackbarDuration.Long,
                         )
                     }
                 }
@@ -92,6 +94,7 @@ private fun MuseumListScreen(
             SearchTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 queryValue = state.query,
+                loading = state.loading,
                 onValueChange = onQueryChange,
                 onSearchKeyboardClick = {
                     scope.launch {
@@ -131,7 +134,7 @@ private fun Preview_MuseumListScreen() {
     HapptechTheme {
         MuseumListScreen(
             modifier = Modifier.fillMaxSize(),
-            state = UiState(),
+            state = UiState.Default,
             snackbarHostState = remember { SnackbarHostState() },
             onQueryChange = {},
             onItemClick = {},

@@ -18,22 +18,29 @@ class MuseumListViewModel(
     private val repository: RijksMuseumRepository,
 ) : ViewModel() {
 
-    private val queryFlow = MutableStateFlow("")
+    private val queryFlow = MutableStateFlow(UiState.Default.query)
+    private val loadingFlow = MutableStateFlow(UiState.Default.loading)
 
     val uiState: StateFlow<UiState> = combine(
         queryFlow,
         repository.getCollectionFlow(),
-    ) { query, collection ->
-        query to collection
-    }.map { (query, collection) ->
+        loadingFlow,
+    ) { query, collection, loading ->
+        Triple(
+            query,
+            collection,
+            loading
+        )
+    }.map { (query, collection, loading) ->
         UiState(
             query = query,
             items = collection.toImmutableList(),
+            loading = loading,
         )
     }.stateIn(
         scope = viewModelScope,
         started = WhileSubscribed(5_000),
-        initialValue = UiState(),
+        initialValue = UiState.Default,
     )
 
     private val _uiEvents = Channel<UiEvent>()
@@ -52,15 +59,17 @@ class MuseumListViewModel(
     }
 
     private fun refresh() {
+        loadingFlow.value = true
+
         viewModelScope.launch {
-            repository.refreshCollection(queryFlow.value)
-                .onFailure {
-                    _uiEvents.send(
-                        UiEvent.ShowSnackBar(
-                            messageRes = R.string.feature_museumcollection_error_default
-                        )
+            repository.refreshCollection(queryFlow.value).onFailure {
+                _uiEvents.send(
+                    UiEvent.ShowSnackBar(
+                        messageRes = R.string.feature_museumcollection_error_default
                     )
-                }
+                )
+            }
+            loadingFlow.value = false
         }
     }
 }
