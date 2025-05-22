@@ -10,7 +10,7 @@ val networkModule = module {
     single {
         createRijksMuseumHttpClient(
             engine = get(),
-            apiKey = "rIl6yb6x", //TODO: extract and inject api key
+            apiKey = "rIl6yb6x",
         )
     }
 }
