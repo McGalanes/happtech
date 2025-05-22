@@ -12,13 +12,21 @@ import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle.State
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import com.github.mcgalanes.happtech.core.design.HapptechTheme
 import com.github.mcgalanes.happtech.core.design.util.isLargeScreen
 import com.github.mcgalanes.happtech.feature.museumcollection.list.component.ArtObjectItem
@@ -34,9 +42,29 @@ fun MuseumListScreen(
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
+    val snackbarHostState = remember { SnackbarHostState() }
+    val lifecycleOwner = LocalLifecycleOwner.current
+    val resources = LocalContext.current.resources
+
+    LaunchedEffect(lifecycleOwner) {
+        lifecycleOwner.repeatOnLifecycle(state = State.RESUMED) {
+            viewModel.uiEvents.collect { event ->
+                when (event) {
+                    is UiEvent.ShowSnackBar -> {
+                        snackbarHostState.showSnackbar(
+                            message = resources.getString(event.messageRes),
+                            withDismissAction = true,
+                        )
+                    }
+                }
+            }
+        }
+    }
+
     MuseumListScreen(
         modifier = modifier,
         state = state,
+        snackbarHostState = snackbarHostState,
         onItemClick = navToDetail,
         onQueryChange = viewModel::onQueryChange,
         onSearchClick = viewModel::onSearchClick,
@@ -46,6 +74,7 @@ fun MuseumListScreen(
 @Composable
 private fun MuseumListScreen(
     state: UiState,
+    snackbarHostState: SnackbarHostState,
     onQueryChange: (String) -> Unit,
     onSearchClick: () -> Unit,
     onItemClick: (objectNumber: String) -> Unit,
@@ -58,6 +87,7 @@ private fun MuseumListScreen(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.background,
         contentColor = MaterialTheme.colorScheme.onBackground,
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             SearchTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
@@ -102,6 +132,7 @@ private fun Preview_MuseumListScreen() {
         MuseumListScreen(
             modifier = Modifier.fillMaxSize(),
             state = UiState(),
+            snackbarHostState = remember { SnackbarHostState() },
             onQueryChange = {},
             onItemClick = {},
             onSearchClick = {},
