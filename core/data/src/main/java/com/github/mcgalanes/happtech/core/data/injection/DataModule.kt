@@ -2,7 +2,9 @@ package com.github.mcgalanes.happtech.core.data.injection
 
 import com.github.mcgalanes.happtech.core.data.remote.api.LeMondeApi
 import com.github.mcgalanes.happtech.core.data.remote.api.RijksMuseumApi
+import com.github.mcgalanes.happtech.core.data.repository.DefaultLeMondeRepository
 import com.github.mcgalanes.happtech.core.data.repository.DefaultRijksMuseumRepository
+import com.github.mcgalanes.happtech.core.domain.repository.LeMondeRepository
 import com.github.mcgalanes.happtech.core.domain.repository.RijksMuseumRepository
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -13,4 +15,5 @@ val dataModule = module {
     singleOf(::DefaultRijksMuseumRepository) bind RijksMuseumRepository::class
 
     singleOf(LeMondeApi::Default) bind LeMondeApi::class
+    singleOf(::DefaultLeMondeRepository) bind LeMondeRepository::class
 }
