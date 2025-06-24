@@ -15,4 +15,7 @@ sealed class NavScreen {
             const val ARG_OBJECT_NUMBER = "arg:object_number"
         }
     }
+
+    @Serializable
+    data object LeMondeList : NavScreen()
 }

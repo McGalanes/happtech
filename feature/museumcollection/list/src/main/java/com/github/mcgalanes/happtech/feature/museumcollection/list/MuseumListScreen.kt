@@ -103,7 +103,8 @@ private fun MuseumListScreen(
                     onSearchClick()
                 },
             )
-        }) { padding ->
+        },
+    ) { padding ->
         LazyVerticalStaggeredGrid(
             modifier = Modifier
                 .fillMaxSize()

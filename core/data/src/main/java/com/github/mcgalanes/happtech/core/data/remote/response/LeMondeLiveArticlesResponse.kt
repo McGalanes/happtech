@@ -6,17 +6,16 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class LeMondeLiveArticlesResponse(
-    @SerialName("elements") val elements: List<Element>?,
+    @SerialName("elements") val elements: List<Element?> = emptyList(),
 ) {
     @Serializable
     data class Element(
-        @SerialName("titre") val title: String?,
+        @SerialName("titre") val title: String? = null,
     )
 }
 
 fun LeMondeLiveArticlesResponse.toDomain(): List<LeMondeElement> =
-    requireNotNull(elements) { "Elements cannot be null" }
-        .mapNotNull(LeMondeLiveArticlesResponse.Element::toDomain)
+    elements.mapNotNull { it?.toDomain() }
 
 
 fun LeMondeLiveArticlesResponse.Element.toDomain(): LeMondeElement? =

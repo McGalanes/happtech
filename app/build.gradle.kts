@@ -22,6 +22,7 @@ dependencies {
     // Features
     implementation(projects.feature.museumcollection.list)
     implementation(projects.feature.museumcollection.detail)
+    implementation(projects.feature.lemonde.list)
 
     // Core Android dependencies
     implementation(libs.androidx.core.ktx)

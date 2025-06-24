@@ -4,6 +4,7 @@ import android.app.Application
 import com.github.mcgalanes.happtech.core.data.injection.dataModule
 import com.github.mcgalanes.happtech.core.database.injection.databaseModule
 import com.github.mcgalanes.happtech.core.network.injection.networkModule
+import com.github.mcgalanes.happtech.feature.lemonde.list.injection.leMondeListFeatureModule
 import com.github.mcgalanes.happtech.feature.museumcollection.detail.injection.museumDetailFeatureModule
 import com.github.mcgalanes.happtech.feature.museumcollection.list.injection.museumListFeatureModule
 import org.koin.android.ext.koin.androidContext
@@ -25,5 +26,6 @@ private fun getModules(): List<Module> =
         databaseModule,
         museumDetailFeatureModule,
         museumListFeatureModule,
+        leMondeListFeatureModule,
         networkModule,
     )

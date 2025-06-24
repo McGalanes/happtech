@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.github.mcgalanes.happtech.core.design.HapptechTheme
 import com.github.mcgalanes.happtech.core.navigation.NavScreen
+import com.github.mcgalanes.happtech.feature.lemonde.list.LeMondeListScreen
 import com.github.mcgalanes.happtech.feature.museumcollection.detail.MuseumDetailScreen
 import com.github.mcgalanes.happtech.feature.museumcollection.list.MuseumListScreen
 
@@ -26,8 +27,13 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(
                     navController = navController,
-                    startDestination = NavScreen.MuseumList,
+                    startDestination = NavScreen.LeMondeList,
                 ) {
+                    composable<NavScreen.LeMondeList> {
+                        LeMondeListScreen(
+                            modifier = Modifier.fillMaxSize(),
+                        )
+                    }
                     composable<NavScreen.MuseumList> {
                         MuseumListScreen(
                             modifier = Modifier.fillMaxSize(),
