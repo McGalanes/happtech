@@ -1,18 +1,12 @@
 package com.github.mcgalanes.happtech.core.navigation
 
-import kotlinx.serialization.SerialName
+import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
-sealed class NavScreen {
-    @Serializable
-    data object MuseumList : NavScreen()
+@Serializable
+data object MuseumListScreen : NavKey
 
-    @Serializable
-    data class MuseumDetail(
-        @SerialName(ARG_OBJECT_NUMBER) val objectNumber: String,
-    ) : NavScreen() {
-        companion object {
-            const val ARG_OBJECT_NUMBER = "arg:object_number"
-        }
-    }
-}
+@Serializable
+data class MuseumDetailScreen(
+    val objectNumber: String,
+) : NavKey

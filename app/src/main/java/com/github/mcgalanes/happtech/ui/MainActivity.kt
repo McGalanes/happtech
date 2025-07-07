@@ -6,13 +6,20 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavEntry
+import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
+import androidx.navigation3.ui.NavDisplay
+import androidx.navigation3.ui.rememberSceneSetupNavEntryDecorator
 import com.github.mcgalanes.happtech.core.design.HapptechTheme
-import com.github.mcgalanes.happtech.core.navigation.NavScreen
+import com.github.mcgalanes.happtech.core.navigation.MuseumDetailScreen
+import com.github.mcgalanes.happtech.core.navigation.MuseumListScreen
 import com.github.mcgalanes.happtech.feature.museumcollection.detail.MuseumDetailScreen
 import com.github.mcgalanes.happtech.feature.museumcollection.list.MuseumListScreen
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 class MainActivity : ComponentActivity() {
 
@@ -22,29 +29,47 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             HapptechTheme {
-                val navController = rememberNavController()
+                val backStack = rememberNavBackStack(MuseumListScreen)
 
-                NavHost(
-                    navController = navController,
-                    startDestination = NavScreen.MuseumList,
-                ) {
-                    composable<NavScreen.MuseumList> {
-                        MuseumListScreen(
-                            modifier = Modifier.fillMaxSize(),
-                            navToDetail = { objectNumber ->
-                                navController.navigate(NavScreen.MuseumDetail(objectNumber))
-                            },
-                        )
-                    }
+                NavDisplay(
+                    modifier = Modifier.fillMaxSize(),
+                    backStack = backStack,
+                    entryDecorators = listOf(
+                        rememberSavedStateNavEntryDecorator(),
+                        rememberViewModelStoreNavEntryDecorator(),
+                        rememberSceneSetupNavEntryDecorator(),
+                    ),
+                ) { navKey ->
+                    when (navKey) {
+                        is MuseumListScreen -> {
+                            NavEntry(key = navKey) {
+                                MuseumListScreen(
+                                    modifier = Modifier.fillMaxSize(),
+                                    navToDetail = { objectNumber ->
+                                        backStack.add(MuseumDetailScreen(objectNumber))
+                                    },
+                                )
+                            }
+                        }
 
-                    composable<NavScreen.MuseumDetail> {
-                        MuseumDetailScreen(
-                            modifier = Modifier.fillMaxSize(),
-                            onNavUp = { navController.navigateUp() },
-                        )
+                        is MuseumDetailScreen -> {
+                            NavEntry(key = navKey) {
+                                MuseumDetailScreen(
+                                    modifier = Modifier.fillMaxSize(),
+                                    viewModel = koinViewModel {
+                                        parametersOf(navKey.objectNumber)
+                                    },
+                                    onNavUp = { backStack.pop() },
+                                )
+                            }
+                        }
+
+                        else -> throw IllegalArgumentException("Unknown NavKey: $navKey")
                     }
                 }
             }
         }
     }
 }
+
+private fun NavBackStack.pop() = removeAt(lastIndex)

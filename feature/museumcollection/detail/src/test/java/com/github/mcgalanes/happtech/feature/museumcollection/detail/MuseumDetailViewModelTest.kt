@@ -1,9 +1,7 @@
 package com.github.mcgalanes.happtech.feature.museumcollection.detail
 
-import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.github.mcgalanes.happtech.core.domain.model.ArtObjectDetail
-import com.github.mcgalanes.happtech.core.navigation.NavScreen.MuseumDetail.Companion.ARG_OBJECT_NUMBER
 import com.github.mcgalanes.happtech.feature.museumcollection.fake.FakeRijksMuseumRepository
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
@@ -19,13 +17,11 @@ class MuseumDetailViewModelTest {
             setDataForDetail(artObjectDetail)
         }
 
-        val handle =
-            SavedStateHandle(mapOf(ARG_OBJECT_NUMBER to artObjectDetail.objectNumber))
 
         // WHEN
         val viewModel =
             MuseumDetailViewModel(
-                handle = handle,
+                objectNumber = artObjectDetail.objectNumber,
                 repository = repository,
             )
 
@@ -51,13 +47,10 @@ class MuseumDetailViewModelTest {
             setDataForDetail(null)
         }
 
-        val handle =
-            SavedStateHandle(mapOf(ARG_OBJECT_NUMBER to "object-12"))
-
         // WHEN
         val viewModel =
             MuseumDetailViewModel(
-                handle = handle,
+                objectNumber = "123",
                 repository = repository,
             )
 
@@ -84,12 +77,9 @@ class MuseumDetailViewModelTest {
             setDataForDetail(artObjectDetail)
         }
 
-        val handle =
-            SavedStateHandle(mapOf(ARG_OBJECT_NUMBER to artObjectDetail.objectNumber))
-
         val viewModel =
             MuseumDetailViewModel(
-                handle = handle,
+                objectNumber = artObjectDetail.objectNumber,
                 repository = repository,
             )
 
@@ -113,12 +103,9 @@ class MuseumDetailViewModelTest {
             setDataForDetail(artObjectDetail)
         }
 
-        val handle =
-            SavedStateHandle(mapOf(ARG_OBJECT_NUMBER to artObjectDetail.objectNumber))
-
         val viewModel =
             MuseumDetailViewModel(
-                handle = handle,
+                objectNumber = artObjectDetail.objectNumber,
                 repository = repository,
             )
 
@@ -144,12 +131,10 @@ class MuseumDetailViewModelTest {
             setDataForDetail(null)
         }
 
-        val handle =
-            SavedStateHandle(mapOf(ARG_OBJECT_NUMBER to artObjectDetail.objectNumber))
 
         val viewModel =
             MuseumDetailViewModel(
-                handle = handle,
+                objectNumber = artObjectDetail.objectNumber,
                 repository = repository,
             )
 

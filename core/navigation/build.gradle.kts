@@ -9,4 +9,5 @@ android {
 
 dependencies {
     implementation(libs.ktor.serialization)
+    implementation(libs.nav3.runtime)
 }
